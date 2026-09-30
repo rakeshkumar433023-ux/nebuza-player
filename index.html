@@ -348,6 +348,17 @@
       alert("VIP payment system will be connected in the next step.");
     }
 
+    // In-App Interstitial
+show_11929319({
+  type: 'inApp',
+  inAppSettings: {
+    frequency: 2,
+    capping: 0.1,
+    interval: 30,
+    timeout: 5,
+    everyPage: false
+  }
+});
   </script>
 
 </body>
