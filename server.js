@@ -1,4 +1,5 @@
 const express = require("express");
+const channelVideos = new Map();
 
 const app = express();
 app.use(express.json());
@@ -98,6 +99,17 @@ if (urlMatch) {
 
   console.log("SOURCE URL FOUND!");
   console.log("Source URL:", sourceUrl);
+
+  const videoKey = `c${post.chat.id}_m${post.message_id}`;
+
+  channelVideos.set(videoKey, {
+    sourceUrl: sourceUrl,
+    chatId: post.chat.id,
+    messageId: post.message_id
+  });
+
+  console.log("VIDEO SAVED:", videoKey);
+}
 } else {
   console.log("No source URL found in caption.");
 }
