@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <meta charset="UTF-8">
   <meta
@@ -11,8 +12,7 @@
   <title>Nebuza Player</title>
 
   <!-- Telegram Mini App SDK -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
+  
   <!-- Monetag SDK - In-App Interstitial -->
   <script
     src="https://libtl.com/sdk.js"
@@ -1042,7 +1042,24 @@ function selectVIPPlan(plan, amount) {
       }
 
     }, 10000);
+    
+<script>
+const tg = window.Telegram?.WebApp;
 
+if (tg) {
+  tg.ready();
+
+  const startParam =
+    tg.initDataUnsafe?.start_param ||
+    new URLSearchParams(window.location.search).get("tgWebAppStartParam");
+
+  console.log("Nebuza Start Param:", startParam);
+
+  if (startParam) {
+    console.log("Channel video request:", startParam);
+  }
+}
+</script>
   </script>
 
 
