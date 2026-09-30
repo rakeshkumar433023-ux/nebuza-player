@@ -1,1 +1,221 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebuza VIP Payment</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070b14;
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 430px;
+      margin: auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      color: #9ca3af;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid #293548;
+      border-radius: 22px;
+      padding: 22px;
+      margin-top: 15px;
+    }
+
+    .selected {
+      border: 2px solid #8b5cf6;
+      box-shadow: 0 0 25px rgba(139,92,246,.15);
+    }
+
+    .plan-name {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: 900;
+      margin-top: 8px;
+    }
+
+    .validity {
+      color: #9ca3af;
+      margin-top: 5px;
+    }
+
+    .pay-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 15px;
+      margin-top: 18px;
+      background: #7c3aed;
+      color: white;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .pay-btn:active {
+      transform: scale(.98);
+    }
+
+    .info {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 13px;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    .user-box {
+      background: #1f2937;
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 15px;
+      color: #d1d5db;
+      font-size: 13px;
+      word-break: break-all;
+    }
+
+    .notice {
+      background: #172033;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 15px;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">⭐ Nebuza VIP</div>
+    <div class="subtitle">Premium access • No Ads</div>
+  </div>
+
+  <div class="card selected">
+
+    <div class="plan-name" id="planName">
+      1 Month VIP
+    </div>
+
+    <div class="price" id="planPrice">
+      ₹49
+    </div>
+
+    <div class="validity" id="planValidity">
+      Valid for 30 days
+    </div>
+
+    <button class="pay-btn" onclick="startPayment()">
+      💳 Continue to Payment
+    </button>
+
+  </div>
+
+  <div class="user-box">
+    Telegram User ID:
+    <strong id="userId">Loading...</strong>
+  </div>
+
+  <div class="notice">
+    🔒 Your VIP access will be activated only after the payment
+    is successfully verified by the payment system.
+  </div>
+
+  <div class="info">
+    Nebuza Player<br>
+    Secure payment • VIP = No Ads
+  </div>
+
+</div>
+
+<script>
+
+  const params = new URLSearchParams(window.location.search);
+
+  const plan = params.get("plan");
+  const userId = params.get("userId");
+
+  const plans = {
+    "1month": {
+      name: "1 Month VIP",
+      price: 49,
+      days: 30
+    },
+
+    "3month": {
+      name: "3 Months VIP",
+      price: 99,
+      days: 90
+    },
+
+    "1year": {
+      name: "1 Year VIP",
+      price: 199,
+      days: 365
+    }
+  };
+
+  const selectedPlan = plans[plan] || plans["1month"];
+
+  document.getElementById("planName").textContent =
+    selectedPlan.name;
+
+  document.getElementById("planPrice").textContent =
+    "₹" + selectedPlan.price;
+
+  document.getElementById("planValidity").textContent =
+    "Valid for " + selectedPlan.days + " days";
+
+  document.getElementById("userId").textContent =
+    userId || "Not available";
+
+
+  function startPayment() {
+
+    alert(
+      "Payment gateway will be connected after Razorpay approval.\\n\\n" +
+      selectedPlan.name +
+      " — ₹" +
+      selectedPlan.price
+    );
+
+  }
+
+</script>
+
+</body>
+</html>
