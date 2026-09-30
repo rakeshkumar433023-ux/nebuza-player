@@ -89,12 +89,22 @@ app.post("/webhook", async (req, res) => {
     if (update.channel_post) {
   const post = update.channel_post;
 
+  const video = post.video;
+
+if (video) {
+  console.log("VIDEO FOUND!");
+  console.log("File ID:", video.file_id);
+  console.log("File size:", video.file_size);
+  console.log("Duration:", video.duration);
+} else {
+  console.log("This channel post has no Telegram video.");
+}
   const chatId = post.chat.id;
-  const messageId = post.message_id;
+const messageId = post.message_id;
 
-  console.log("Channel post:", chatId, messageId);
+console.log("Channel post:", chatId, messageId);
 
-  const startParam = `c${chatId}_m${messageId}`;
+const startParam = `c${chatId}_m${messageId}`;
 
   const miniAppUrl =
     `https://t.me/Nebuza_video_bot?startapp=${encodeURIComponent(startParam)}`;
