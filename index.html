@@ -820,11 +820,187 @@
 
     function buyVIP() {
 
-      alert(
-        "VIP payment system will be connected in the next step."
-      );
+  const oldModal = document.getElementById("vipModal");
+  if (oldModal) oldModal.remove();
 
-    }
+  const modal = document.createElement("div");
+  modal.id = "vipModal";
+
+  modal.innerHTML = `
+    <div style="
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.75);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:99999;
+      padding:20px;
+    ">
+
+      <div style="
+        width:100%;
+        max-width:390px;
+        background:#111827;
+        color:white;
+        border-radius:22px;
+        padding:24px;
+        box-shadow:0 20px 60px rgba(0,0,0,0.5);
+      ">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:20px;
+        ">
+          <div>
+            <div style="font-size:24px;font-weight:800;">
+              ⭐ Nebuza VIP
+            </div>
+            <div style="color:#9ca3af;margin-top:5px;">
+              Ads-free premium access
+            </div>
+          </div>
+
+          <button
+            onclick="document.getElementById('vipModal').remove()"
+            style="
+              border:0;
+              background:#374151;
+              color:white;
+              width:36px;
+              height:36px;
+              border-radius:50%;
+              font-size:20px;
+            "
+          >×</button>
+        </div>
+
+        <div style="
+          background:#1f2937;
+          border:1px solid #374151;
+          border-radius:16px;
+          padding:16px;
+          margin-bottom:12px;
+        ">
+          <div style="font-size:18px;font-weight:700;">
+            1 Month
+          </div>
+          <div style="font-size:28px;font-weight:800;margin-top:5px;">
+            ₹49
+          </div>
+          <div style="color:#9ca3af;font-size:13px;">
+            Valid for 30 days
+          </div>
+
+          <button
+            onclick="selectVIPPlan('1month',49)"
+            style="
+              width:100%;
+              margin-top:12px;
+              padding:12px;
+              border:0;
+              border-radius:12px;
+              background:#2563eb;
+              color:white;
+              font-size:16px;
+              font-weight:700;
+            "
+          >Choose Plan</button>
+        </div>
+
+        <div style="
+          background:#1f2937;
+          border:1px solid #374151;
+          border-radius:16px;
+          padding:16px;
+          margin-bottom:12px;
+        ">
+          <div style="font-size:18px;font-weight:700;">
+            3 Months
+          </div>
+          <div style="font-size:28px;font-weight:800;margin-top:5px;">
+            ₹99
+          </div>
+          <div style="color:#9ca3af;font-size:13px;">
+            Valid for 90 days
+          </div>
+
+          <button
+            onclick="selectVIPPlan('3month',99)"
+            style="
+              width:100%;
+              margin-top:12px;
+              padding:12px;
+              border:0;
+              border-radius:12px;
+              background:#2563eb;
+              color:white;
+              font-size:16px;
+              font-weight:700;
+            "
+          >Choose Plan</button>
+        </div>
+
+        <div style="
+          background:#1f2937;
+          border:1px solid #f59e0b;
+          border-radius:16px;
+          padding:16px;
+        ">
+          <div style="font-size:18px;font-weight:700;">
+            👑 1 Year
+          </div>
+          <div style="font-size:28px;font-weight:800;margin-top:5px;">
+            ₹199
+          </div>
+          <div style="color:#9ca3af;font-size:13px;">
+            Valid for 365 days
+          </div>
+
+          <button
+            onclick="selectVIPPlan('1year',199)"
+            style="
+              width:100%;
+              margin-top:12px;
+              padding:12px;
+              border:0;
+              border-radius:12px;
+              background:#f59e0b;
+              color:#111827;
+              font-size:16px;
+              font-weight:800;
+            "
+          >Choose Plan</button>
+        </div>
+
+        <div style="
+          text-align:center;
+          color:#9ca3af;
+          font-size:12px;
+          margin-top:18px;
+        ">
+          Secure payment • VIP = No Ads
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+
+function selectVIPPlan(plan, amount) {
+
+  alert(
+    "Selected: " + plan +
+    "\\nAmount: ₹" + amount +
+    "\\n\\nRazorpay payment will be connected after approval."
+  );
+
+}
 
 
     /* =========================
