@@ -79,6 +79,29 @@ app.get("/api/video", (req, res) => {
   });
 });
 
+// Telegram webhook
+app.post("/webhook", async (req, res) => {
+  try {
+    const update = req.body;
+
+    console.log("Telegram update received:", JSON.stringify(update));
+
+    if (update.channel_post) {
+      const post = update.channel_post;
+
+      const chatId = post.chat.id;
+      const messageId = post.message_id;
+
+      console.log("Channel post:", chatId, messageId);
+    }
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Webhook error:", error);
+    res.sendStatus(200);
+  }
+});
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Nebuza Backend running on port ${PORT}`);
 });
