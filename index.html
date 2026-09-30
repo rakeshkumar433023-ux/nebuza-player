@@ -6,20 +6,33 @@
 
   <title>Nebuza Player</title>
 
+  <!-- Telegram Mini App -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <script src="https://libtl.com/sdk.js" data-zone="11929321" data-sdk="show_11929321"></script>
-    <style>
-  * {
+  <!-- Monetag In-App Interstitial -->
+  <script
+    src="https://libtl.com/sdk.js"
+    data-zone="11929321"
+    data-sdk="show_11929321">
+  </script>
+
+  <style>
+
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-</style>
+
     body {
       min-height: 100vh;
       background:
-        radial-gradient(circle at 50% 10%, #24104b 0%, #0a0712 35%, #050509 75%);
+        radial-gradient(
+          circle at 50% 10%,
+          #24104b 0%,
+          #0a0712 35%,
+          #050509 75%
+        );
       color: white;
       font-family: Arial, Helvetica, sans-serif;
       padding: 20px 16px 35px;
@@ -58,6 +71,7 @@
       font-size: 48px;
 
       background: linear-gradient(145deg, #9b5cff, #6341e8);
+
       box-shadow:
         0 0 15px #8d4cff,
         0 0 40px rgba(132, 65, 255, 0.35);
@@ -67,6 +81,7 @@
       text-align: center;
       font-size: 38px;
       margin-bottom: 12px;
+
       background: linear-gradient(90deg, #ffffff, #b76cff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -84,19 +99,25 @@
       display: flex;
       gap: 8px;
       padding: 7px;
+
       border: 1px solid #292333;
       border-radius: 24px;
+
       background: rgba(15, 12, 24, 0.9);
+
       margin-bottom: 25px;
     }
 
     .input-box input {
       width: 100%;
       min-width: 0;
+
       border: 0;
       outline: none;
+
       background: transparent;
       color: white;
+
       padding: 14px;
       font-size: 15px;
     }
@@ -104,18 +125,26 @@
     .play-btn {
       border: 0;
       color: white;
+
       font-size: 16px;
       font-weight: bold;
+
       padding: 0 20px;
       border-radius: 18px;
+
       background: linear-gradient(135deg, #16bff5, #357cff);
-      box-shadow: 0 0 20px rgba(20, 170, 255, 0.3);
+
+      box-shadow:
+        0 0 20px rgba(20, 170, 255, 0.3);
     }
 
     .feature {
       border: 1px solid #292333;
+
       background: rgba(13, 10, 22, 0.85);
+
       border-radius: 22px;
+
       padding: 20px;
       margin-top: 16px;
 
@@ -127,7 +156,9 @@
     .icon {
       width: 58px;
       height: 58px;
+
       flex-shrink: 0;
+
       border-radius: 17px;
 
       display: flex;
@@ -135,6 +166,7 @@
       justify-content: center;
 
       font-size: 28px;
+
       background: #211337;
       border: 1px solid #55318a;
     }
@@ -152,33 +184,35 @@
 
     .vip-button {
       width: 100%;
+
       border: 0;
+
       padding: 17px;
       margin-top: 24px;
 
       border-radius: 18px;
+
       color: white;
+
       font-size: 17px;
       font-weight: bold;
 
       background: linear-gradient(135deg, #8d43ff, #5b31d6);
-      box-shadow: 0 0 25px rgba(126, 61, 255, 0.25);
-    }
 
-    .footer {
-      text-align: center;
-      color: #625d6d;
-      font-size: 12px;
-      margin-top: 55px;
-      letter-spacing: 1px;
+      box-shadow:
+        0 0 25px rgba(126, 61, 255, 0.25);
     }
 
     .player {
       display: none;
+
       margin-top: 25px;
+
       border-radius: 22px;
       overflow: hidden;
+
       border: 1px solid #292333;
+
       background: #0c0912;
     }
 
@@ -196,13 +230,30 @@
 
     .player-buttons button {
       flex: 1;
+
       padding: 14px;
+
       border: 0;
       border-radius: 15px;
+
       color: white;
       font-weight: bold;
+
       background: #211d2c;
     }
+
+    .footer {
+      text-align: center;
+
+      color: #625d6d;
+
+      font-size: 12px;
+
+      margin-top: 55px;
+
+      letter-spacing: 1px;
+    }
+
   </style>
 </head>
 
@@ -211,70 +262,127 @@
   <div class="container">
 
     <div class="top">
-      <div class="vip">⭐ VIP ACTIVE</div>
+      <div class="vip">
+        ⭐ VIP ACTIVE
+      </div>
     </div>
 
-    <div class="logo">▶</div>
+    <div class="logo">
+      ▶
+    </div>
 
-    <h1>Nebuza Player</h1>
+    <h1>
+      Nebuza Player
+    </h1>
 
     <div class="subtitle">
       Watch your video directly inside Telegram
     </div>
 
     <div class="input-box">
+
       <input
         id="videoLink"
         type="text"
         placeholder="Paste your secure media link"
       >
 
-      <button class="play-btn" onclick="playVideo()">
+      <button
+        class="play-btn"
+        onclick="playVideo()">
         ▶ Play
       </button>
+
     </div>
 
     <div class="feature">
-      <div class="icon">⚡</div>
+
+      <div class="icon">
+        ⚡
+      </div>
+
       <div>
-        <h2>Ultra Fast Stream</h2>
+
+        <h2>
+          Ultra Fast Stream
+        </h2>
+
         <p>
           Instantly load videos with high-speed streaming.
         </p>
+
       </div>
+
     </div>
 
     <div class="feature">
-      <div class="icon">🛡️</div>
+
+      <div class="icon">
+        🛡️
+      </div>
+
       <div>
-        <h2>Secure & Private</h2>
+
+        <h2>
+          Secure & Private
+        </h2>
+
         <p>
           Your session is protected inside Telegram.
         </p>
+
       </div>
+
     </div>
 
     <div class="feature">
-      <div class="icon">🎥</div>
+
+      <div class="icon">
+        🎥
+      </div>
+
       <div>
-        <h2>Full HD Quality</h2>
+
+        <h2>
+          Full HD Quality
+        </h2>
+
         <p>
           Stream videos in the available source quality.
         </p>
+
       </div>
+
     </div>
 
-    <button class="vip-button" onclick="buyVIP()">
+    <button
+      class="vip-button"
+      onclick="buyVIP()">
+
       💎 GET VIP — REMOVE ADS
+
     </button>
 
-    <div id="player" class="player">
+    <div
+      id="player"
+      class="player">
 
-      <video id="videoPlayer" controls playsinline></video>
+      <video
+        id="videoPlayer"
+        controls
+        playsinline>
+      </video>
 
       <div class="player-buttons">
-        <button onclick="downloadVideo()">📥 Download</button>
-        <button onclick="newLink()">🔄 New Link</button>
+
+        <button onclick="downloadVideo()">
+          📥 Download
+        </button>
+
+        <button onclick="newLink()">
+          🔄 New Link
+        </button>
+
       </div>
 
     </div>
@@ -284,6 +392,7 @@
     </div>
 
   </div>
+
 
   <script>
 
@@ -295,70 +404,141 @@
       tg.expand();
     }
 
+
+    // Play Video
     function playVideo() {
 
-  const link = document.getElementById("videoLink").value.trim();
-
-  if (!link) {
-    alert("Please enter a video link.");
-    return;
-  }
-
-  const player = document.getElementById("player");
-  const video = document.getElementById("videoPlayer");
-
-  video.src = link;
-  player.style.display = "block";
-
-  video.play().catch(() => {
-    console.log("Tap play to start the video.");
-  });
-
-  player.scrollIntoView({
-    behavior: "smooth"
-  });
-}
-
-    function newLink() {
-
-      document.getElementById("videoLink").value = "";
-
-      document.getElementById("videoPlayer").pause();
-
-      document.getElementById("videoPlayer").src = "";
-
-      document.getElementById("player").style.display = "none";
-    }
-
-    function downloadVideo() {
-
-      const link = document.getElementById("videoLink").value.trim();
+      const link =
+        document
+          .getElementById("videoLink")
+          .value
+          .trim();
 
       if (!link) {
-        alert("No video link available.");
+
+        alert("Please enter a video link.");
+
         return;
       }
 
-      window.open(link, "_blank");
+      const player =
+        document.getElementById("player");
+
+      const video =
+        document.getElementById("videoPlayer");
+
+      video.src = link;
+
+      player.style.display = "block";
+
+      video.play().catch(() => {
+
+        console.log(
+          "Tap play to start the video."
+        );
+
+      });
+
+      player.scrollIntoView({
+        behavior: "smooth"
+      });
+
     }
 
+
+    // New Link
+    function newLink() {
+
+      document
+        .getElementById("videoLink")
+        .value = "";
+
+      document
+        .getElementById("videoPlayer")
+        .pause();
+
+      document
+        .getElementById("videoPlayer")
+        .src = "";
+
+      document
+        .getElementById("player")
+        .style.display = "none";
+
+    }
+
+
+    // Download Video
+    function downloadVideo() {
+
+      const link =
+        document
+          .getElementById("videoLink")
+          .value
+          .trim();
+
+      if (!link) {
+
+        alert("No video link available.");
+
+        return;
+      }
+
+      window.open(
+        link,
+        "_blank"
+      );
+
+    }
+
+
+    // VIP Button
     function buyVIP() {
 
-      alert("VIP payment system will be connected in the next step.");
+      alert(
+        "VIP payment system will be connected in the next step."
+      );
+
     }
 
-setTimeout(() => {
-  show_11929321({
-    type: 'inApp',
-    inAppSettings: {
-      frequency: 2,
-      capping: 0.1,
-      interval: 30,
-      timeout: 5,
-      everyPage: false
-    }
-  });
-}, 10000);
+
+    // Monetag In-App Interstitial
+    setTimeout(() => {
+
+      if (
+        typeof show_11929321 === "function"
+      ) {
+
+        show_11929321({
+
+          type: "inApp",
+
+          inAppSettings: {
+
+            frequency: 2,
+
+            capping: 0.1,
+
+            interval: 30,
+
+            timeout: 5,
+
+            everyPage: false
+
+          }
+
+        });
+
+      } else {
+
+        console.log(
+          "Monetag SDK is not loaded yet."
+        );
+
+      }
+
+    }, 10000);
+
   </script>
 
 </body>
