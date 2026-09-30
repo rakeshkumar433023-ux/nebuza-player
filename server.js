@@ -101,7 +101,36 @@ app.post("/webhook", async (req, res) => {
     res.sendStatus(200);
   }
 });
+async function setupWebhook() {
+  if (!process.env.BOT_TOKEN) {
+    console.log("BOT_TOKEN is missing");
+    return;
+  }
 
+  const webhookUrl = "https://nebuza-player.onrender.com/webhook";
+
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${process.env.BOT_TOKEN}/setWebhook`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          url: webhookUrl,
+          allowed_updates: ["channel_post"]
+        })
+      }
+    );
+
+    const result = await response.json();
+    console.log("Telegram webhook:", result);
+  } catch (error) {
+    console.error("Webhook setup error:", error);
+  }
+}
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Nebuza Backend running on port ${PORT}`);
 });
+setupWebhook();
