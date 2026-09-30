@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Nebuza Player</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 10%, #24104b 0%, #0a0712 35%, #050509 75%);
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 20px 16px 35px;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: auto;
+    }
+
+    .top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .vip {
+      background: linear-gradient(135deg, #ffb300, #ff7a00);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 0 20px rgba(255, 157, 0, 0.35);
+    }
+
+    .logo {
+      width: 105px;
+      height: 105px;
+      margin: 15px auto 25px;
+      border-radius: 30px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 48px;
+
+      background: linear-gradient(145deg, #9b5cff, #6341e8);
+      box-shadow:
+        0 0 15px #8d4cff,
+        0 0 40px rgba(132, 65, 255, 0.35);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 38px;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #ffffff, #b76cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa5b8;
+      font-size: 17px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .input-box {
+      display: flex;
+      gap: 8px;
+      padding: 7px;
+      border: 1px solid #292333;
+      border-radius: 24px;
+      background: rgba(15, 12, 24, 0.9);
+      margin-bottom: 25px;
+    }
+
+    .input-box input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: white;
+      padding: 14px;
+      font-size: 15px;
+    }
+
+    .play-btn {
+      border: 0;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 0 20px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #16bff5, #357cff);
+      box-shadow: 0 0 20px rgba(20, 170, 255, 0.3);
+    }
+
+    .feature {
+      border: 1px solid #292333;
+      background: rgba(13, 10, 22, 0.85);
+      border-radius: 22px;
+      padding: 20px;
+      margin-top: 16px;
+
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      flex-shrink: 0;
+      border-radius: 17px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 28px;
+      background: #211337;
+      border: 1px solid #55318a;
+    }
+
+    .feature h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: #918c9d;
+      line-height: 1.45;
+      font-size: 15px;
+    }
+
+    .vip-button {
+      width: 100%;
+      border: 0;
+      padding: 17px;
+      margin-top: 24px;
+
+      border-radius: 18px;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+
+      background: linear-gradient(135deg, #8d43ff, #5b31d6);
+      box-shadow: 0 0 25px rgba(126, 61, 255, 0.25);
+    }
+
+    .footer {
+      text-align: center;
+      color: #625d6d;
+      font-size: 12px;
+      margin-top: 55px;
+      letter-spacing: 1px;
+    }
+
+    .player {
+      display: none;
+      margin-top: 25px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid #292333;
+      background: #0c0912;
+    }
+
+    video {
+      width: 100%;
+      display: block;
+      background: black;
+    }
+
+    .player-buttons {
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+    }
+
+    .player-buttons button {
+      flex: 1;
+      padding: 14px;
+      border: 0;
+      border-radius: 15px;
+      color: white;
+      font-weight: bold;
+      background: #211d2c;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="top">
+      <div class="vip">⭐ VIP ACTIVE</div>
+    </div>
+
+    <div class="logo">▶</div>
+
+    <h1>Nebuza Player</h1>
+
+    <div class="subtitle">
+      Watch your video directly inside Telegram
+    </div>
+
+    <div class="input-box">
+      <input
+        id="videoLink"
+        type="text"
+        placeholder="Paste your secure media link"
+      >
+
+      <button class="play-btn" onclick="playVideo()">
+        ▶ Play
+      </button>
+    </div>
+
+    <div class="feature">
+      <div class="icon">⚡</div>
+      <div>
+        <h2>Ultra Fast Stream</h2>
+        <p>
+          Instantly load videos with high-speed streaming.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="icon">🛡️</div>
+      <div>
+        <h2>Secure & Private</h2>
+        <p>
+          Your session is protected inside Telegram.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="icon">🎥</div>
+      <div>
+        <h2>Full HD Quality</h2>
+        <p>
+          Stream videos in the available source quality.
+        </p>
+      </div>
+    </div>
+
+    <button class="vip-button" onclick="buyVIP()">
+      💎 GET VIP — REMOVE ADS
+    </button>
+
+    <div id="player" class="player">
+
+      <video id="videoPlayer" controls playsinline></video>
+
+      <div class="player-buttons">
+        <button onclick="downloadVideo()">📥 Download</button>
+        <button onclick="newLink()">🔄 New Link</button>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      POWERED BY NEBUZA ENGINE • FAST & SECURE
+    </div>
+
+  </div>
+
+  <script>
+
+    // Telegram Mini App
+    const tg = window.Telegram.WebApp;
+
+    if (tg) {
+      tg.ready();
+      tg.expand();
+    }
+
+    function playVideo() {
+
+      const link = document.getElementById("videoLink").value.trim();
+
+      if (!link) {
+        alert("Please enter a video link.");
+        return;
+      }
+
+      const player = document.getElementById("player");
+      const video = document.getElementById("videoPlayer");
+
+      video.src = link;
+
+      player.style.display = "block";
+
+      video.play().catch(() => {
+        console.log("Tap play to start the video.");
+      });
+
+      player.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function newLink() {
+
+      document.getElementById("videoLink").value = "";
+
+      document.getElementById("videoPlayer").pause();
+
+      document.getElementById("videoPlayer").src = "";
+
+      document.getElementById("player").style.display = "none";
+    }
+
+    function downloadVideo() {
+
+      const link = document.getElementById("videoLink").value.trim();
+
+      if (!link) {
+        alert("No video link available.");
+        return;
+      }
+
+      window.open(link, "_blank");
+    }
+
+    function buyVIP() {
+
+      alert("VIP payment system will be connected in the next step.");
+    }
+
+  </script>
+
+</body>
+</html>
