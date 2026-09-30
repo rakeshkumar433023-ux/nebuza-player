@@ -89,15 +89,17 @@ app.post("/webhook", async (req, res) => {
     if (update.channel_post) {
   const post = update.channel_post;
 
-  const video = post.video;
+  const caption = post.caption || "";
 
-if (video) {
-  console.log("VIDEO FOUND!");
-  console.log("File ID:", video.file_id);
-  console.log("File size:", video.file_size);
-  console.log("Duration:", video.duration);
+const urlMatch = caption.match(/https?:\/\/[^\s]+/);
+
+if (urlMatch) {
+  const sourceUrl = urlMatch[0];
+
+  console.log("SOURCE URL FOUND!");
+  console.log("Source URL:", sourceUrl);
 } else {
-  console.log("This channel post has no Telegram video.");
+  console.log("No source URL found in caption.");
 }
   const chatId = post.chat.id;
 const messageId = post.message_id;
