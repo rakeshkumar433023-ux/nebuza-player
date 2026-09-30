@@ -87,13 +87,49 @@ app.post("/webhook", async (req, res) => {
     console.log("Telegram update received:", JSON.stringify(update));
 
     if (update.channel_post) {
-      const post = update.channel_post;
+  const post = update.channel_post;
 
-      const chatId = post.chat.id;
-      const messageId = post.message_id;
+  const chatId = post.chat.id;
+  const messageId = post.message_id;
 
-      console.log("Channel post:", chatId, messageId);
-    }
+  console.log("Channel post:", chatId, messageId);
+
+  const startParam = `c${chatId}_m${messageId}`;
+
+  const miniAppUrl =
+    `https://t.me/Nebuza_video_bot?startapp=${encodeURIComponent(startParam)}`;
+
+  const telegramUrl =
+    `https://api.telegram.org/bot${process.env.BOT_TOKEN}/editMessageReplyMarkup`;
+
+  try {
+    const buttonResponse = await fetch(telegramUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        message_id: messageId,
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "🎬 Play Online Free 💦",
+                url: miniAppUrl
+              }
+            ]
+          ]
+        }
+      })
+    });
+
+    const buttonResult = await buttonResponse.json();
+    console.log("Play button:", buttonResult);
+  } catch (error) {
+    console.error("Button error:", error);
+  }
+}
 
     res.sendStatus(200);
   } catch (error) {
