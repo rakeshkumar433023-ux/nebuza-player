@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  >
 
   <title>Nebuza Player</title>
 
-  <!-- Telegram Mini App -->
+  <!-- Telegram Mini App SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <!-- Monetag In-App Interstitial -->
+  <!-- Monetag SDK - In-App Interstitial -->
   <script
     src="https://libtl.com/sdk.js"
     data-zone="11929321"
@@ -18,282 +22,534 @@
 
   <style>
 
+    /* =========================
+       RESET
+    ========================= */
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
+    /* =========================
+       BODY
+    ========================= */
+
     body {
       min-height: 100vh;
+
       background:
         radial-gradient(
-          circle at 50% 10%,
-          #24104b 0%,
-          #0a0712 35%,
+          circle at 50% 0%,
+          #29105a 0%,
+          #10091f 35%,
           #050509 75%
         );
-      color: white;
-      font-family: Arial, Helvetica, sans-serif;
-      padding: 20px 16px 35px;
+
+      color: #ffffff;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      padding: 18px 14px 35px;
     }
 
+
+    /* =========================
+       MAIN CONTAINER
+    ========================= */
+
     .container {
+      width: 100%;
       max-width: 520px;
-      margin: auto;
+      margin: 0 auto;
     }
+
+
+    /* =========================
+       VIP BADGE
+    ========================= */
 
     .top {
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .vip {
-      background: linear-gradient(135deg, #ffb300, #ff7a00);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 25px;
-      font-weight: bold;
-      box-shadow: 0 0 20px rgba(255, 157, 0, 0.35);
+      display: inline-flex;
+      align-items: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffb300,
+          #ff7200
+        );
+
+      color: #ffffff;
+
+      padding: 9px 15px;
+
+      border-radius: 30px;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      box-shadow:
+        0 0 20px
+        rgba(255, 150, 0, 0.30);
     }
 
+
+    /* =========================
+       LOGO
+    ========================= */
+
     .logo {
-      width: 105px;
-      height: 105px;
-      margin: 15px auto 25px;
-      border-radius: 30px;
+      width: 100px;
+      height: 100px;
+
+      margin: 10px auto 22px;
+
+      border-radius: 28px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      font-size: 48px;
+      font-size: 44px;
 
-      background: linear-gradient(145deg, #9b5cff, #6341e8);
+      background:
+        linear-gradient(
+          145deg,
+          #9b5cff,
+          #5e3be0
+        );
 
       box-shadow:
-        0 0 15px #8d4cff,
-        0 0 40px rgba(132, 65, 255, 0.35);
+        0 0 18px #814cff,
+        0 0 45px
+        rgba(130, 70, 255, 0.25);
     }
+
+
+    /* =========================
+       TITLE
+    ========================= */
 
     h1 {
       text-align: center;
-      font-size: 38px;
-      margin-bottom: 12px;
 
-      background: linear-gradient(90deg, #ffffff, #b76cff);
+      font-size: 34px;
+
+      margin-bottom: 10px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #b96cff
+        );
+
       -webkit-background-clip: text;
+      background-clip: text;
+
       -webkit-text-fill-color: transparent;
     }
 
+
     .subtitle {
       text-align: center;
+
       color: #aaa5b8;
-      font-size: 17px;
+
+      font-size: 15px;
+
       line-height: 1.5;
-      margin-bottom: 28px;
+
+      margin-bottom: 24px;
     }
+
+
+    /* =========================
+       VIDEO LINK BOX
+    ========================= */
 
     .input-box {
+      width: 100%;
+
       display: flex;
-      gap: 8px;
-      padding: 7px;
 
-      border: 1px solid #292333;
-      border-radius: 24px;
+      gap: 7px;
 
-      background: rgba(15, 12, 24, 0.9);
+      padding: 6px;
 
-      margin-bottom: 25px;
+      border:
+        1px solid #30283d;
+
+      border-radius: 22px;
+
+      background:
+        rgba(15, 12, 24, 0.92);
+
+      margin-bottom: 22px;
     }
+
 
     .input-box input {
       width: 100%;
       min-width: 0;
 
-      border: 0;
+      border: none;
       outline: none;
 
       background: transparent;
-      color: white;
 
-      padding: 14px;
-      font-size: 15px;
+      color: #ffffff;
+
+      padding: 13px 11px;
+
+      font-size: 14px;
     }
+
+
+    .input-box input::placeholder {
+      color: #77717f;
+    }
+
 
     .play-btn {
-      border: 0;
-      color: white;
+      flex-shrink: 0;
 
-      font-size: 16px;
-      font-weight: bold;
+      border: none;
 
-      padding: 0 20px;
-      border-radius: 18px;
+      color: #ffffff;
 
-      background: linear-gradient(135deg, #16bff5, #357cff);
+      font-size: 15px;
+
+      font-weight: 700;
+
+      padding: 0 17px;
+
+      border-radius: 17px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #16bff5,
+          #357cff
+        );
 
       box-shadow:
-        0 0 20px rgba(20, 170, 255, 0.3);
+        0 0 18px
+        rgba(20, 170, 255, 0.22);
+
+      cursor: pointer;
     }
 
+
+    .play-btn:active {
+      transform: scale(0.97);
+    }
+
+
+    /* =========================
+       FEATURE CARDS
+    ========================= */
+
     .feature {
-      border: 1px solid #292333;
-
-      background: rgba(13, 10, 22, 0.85);
-
-      border-radius: 22px;
-
-      padding: 20px;
-      margin-top: 16px;
+      width: 100%;
 
       display: flex;
       align-items: center;
-      gap: 18px;
+
+      gap: 15px;
+
+      padding: 17px;
+
+      margin-top: 13px;
+
+      border:
+        1px solid #2c2638;
+
+      border-radius: 20px;
+
+      background:
+        rgba(13, 10, 22, 0.86);
     }
 
+
     .icon {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
 
       flex-shrink: 0;
-
-      border-radius: 17px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      font-size: 28px;
+      border-radius: 16px;
+
+      font-size: 25px;
 
       background: #211337;
-      border: 1px solid #55318a;
+
+      border:
+        1px solid #55318a;
     }
 
+
     .feature h2 {
-      font-size: 20px;
-      margin-bottom: 8px;
+      font-size: 18px;
+
+      margin-bottom: 6px;
     }
+
 
     .feature p {
       color: #918c9d;
+
+      font-size: 14px;
+
       line-height: 1.45;
-      font-size: 15px;
     }
+
+
+    /* =========================
+       VIP BUTTON
+    ========================= */
 
     .vip-button {
       width: 100%;
 
-      border: 0;
+      border: none;
 
-      padding: 17px;
-      margin-top: 24px;
+      padding: 16px;
+
+      margin-top: 22px;
 
       border-radius: 18px;
 
-      color: white;
+      color: #ffffff;
 
-      font-size: 17px;
-      font-weight: bold;
+      font-size: 16px;
 
-      background: linear-gradient(135deg, #8d43ff, #5b31d6);
+      font-weight: 700;
+
+      background:
+        linear-gradient(
+          135deg,
+          #8d43ff,
+          #5b31d6
+        );
 
       box-shadow:
-        0 0 25px rgba(126, 61, 255, 0.25);
+        0 0 25px
+        rgba(126, 61, 255, 0.22);
+
+      cursor: pointer;
     }
+
+
+    .vip-button:active {
+      transform: scale(0.98);
+    }
+
+
+    /* =========================
+       PLAYER
+    ========================= */
 
     .player {
       display: none;
 
-      margin-top: 25px;
+      width: 100%;
 
-      border-radius: 22px;
+      margin-top: 24px;
+
       overflow: hidden;
 
-      border: 1px solid #292333;
+      border-radius: 20px;
 
-      background: #0c0912;
+      border:
+        1px solid #30293d;
+
+      background: #09070d;
+
+      box-shadow:
+        0 10px 35px
+        rgba(0, 0, 0, 0.35);
     }
+
 
     video {
       width: 100%;
+
+      height: auto;
+
       display: block;
-      background: black;
+
+      background: #000000;
     }
+
+
+    /* =========================
+       PLAYER BUTTONS
+    ========================= */
 
     .player-buttons {
       display: flex;
-      gap: 10px;
-      padding: 15px;
+
+      gap: 9px;
+
+      padding: 12px;
     }
+
 
     .player-buttons button {
       flex: 1;
 
-      padding: 14px;
+      border: none;
 
-      border: 0;
-      border-radius: 15px;
+      padding: 13px 8px;
 
-      color: white;
-      font-weight: bold;
+      border-radius: 14px;
+
+      color: #ffffff;
+
+      font-size: 14px;
+
+      font-weight: 700;
 
       background: #211d2c;
+
+      cursor: pointer;
     }
+
+
+    .player-buttons button:active {
+      transform: scale(0.97);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
 
     .footer {
       text-align: center;
 
       color: #625d6d;
 
-      font-size: 12px;
+      font-size: 11px;
 
-      margin-top: 55px;
+      margin-top: 45px;
 
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 420px) {
+
+      body {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .feature {
+        padding: 15px;
+      }
+
+      .icon {
+        width: 50px;
+        height: 50px;
+      }
+
+      .play-btn {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
     }
 
   </style>
+
 </head>
+
 
 <body>
 
   <div class="container">
 
+
+    <!-- VIP STATUS -->
+
     <div class="top">
+
       <div class="vip">
         ⭐ VIP ACTIVE
       </div>
+
     </div>
+
+
+    <!-- LOGO -->
 
     <div class="logo">
       ▶
     </div>
 
+
+    <!-- TITLE -->
+
     <h1>
       Nebuza Player
     </h1>
 
+
     <div class="subtitle">
       Watch your video directly inside Telegram
     </div>
+
+
+    <!-- VIDEO URL -->
 
     <div class="input-box">
 
       <input
         id="videoLink"
         type="text"
-        placeholder="Paste your secure media link"
+        autocomplete="off"
+        placeholder="Paste your video link"
       >
 
       <button
         class="play-btn"
+        type="button"
         onclick="playVideo()">
+
         ▶ Play
+
       </button>
 
     </div>
+
+
+    <!-- FEATURE 1 -->
 
     <div class="feature">
 
@@ -315,6 +571,9 @@
 
     </div>
 
+
+    <!-- FEATURE 2 -->
+
     <div class="feature">
 
       <div class="icon">
@@ -334,6 +593,9 @@
       </div>
 
     </div>
+
+
+    <!-- FEATURE 3 -->
 
     <div class="feature">
 
@@ -355,13 +617,20 @@
 
     </div>
 
+
+    <!-- VIP -->
+
     <button
       class="vip-button"
+      type="button"
       onclick="buyVIP()">
 
       💎 GET VIP — REMOVE ADS
 
     </button>
+
+
+    <!-- VIDEO PLAYER -->
 
     <div
       id="player"
@@ -370,56 +639,91 @@
       <video
         id="videoPlayer"
         controls
-        playsinline>
+        playsinline
+        preload="metadata">
       </video>
+
 
       <div class="player-buttons">
 
-        <button onclick="downloadVideo()">
+        <button
+          type="button"
+          onclick="downloadVideo()">
+
           📥 Download
+
         </button>
 
-        <button onclick="newLink()">
+
+        <button
+          type="button"
+          onclick="newLink()">
+
           🔄 New Link
+
         </button>
 
       </div>
 
     </div>
 
+
+    <!-- FOOTER -->
+
     <div class="footer">
       POWERED BY NEBUZA ENGINE • FAST & SECURE
     </div>
 
+
   </div>
 
 
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
   <script>
 
-    // Telegram Mini App
-    const tg = window.Telegram.WebApp;
+    /* =========================
+       TELEGRAM
+    ========================= */
+
+    const tg = window.Telegram
+      ? window.Telegram.WebApp
+      : null;
+
 
     if (tg) {
+
       tg.ready();
+
       tg.expand();
+
     }
 
 
-    // Play Video
+    /* =========================
+       PLAY VIDEO
+    ========================= */
+
     function playVideo() {
 
+      const input =
+        document.getElementById("videoLink");
+
       const link =
-        document
-          .getElementById("videoLink")
-          .value
-          .trim();
+        input.value.trim();
+
 
       if (!link) {
 
-        alert("Please enter a video link.");
+        alert(
+          "Please enter a video link."
+        );
 
         return;
       }
+
 
       const player =
         document.getElementById("player");
@@ -427,9 +731,11 @@
       const video =
         document.getElementById("videoPlayer");
 
+
       video.src = link;
 
       player.style.display = "block";
+
 
       video.play().catch(() => {
 
@@ -439,36 +745,48 @@
 
       });
 
+
       player.scrollIntoView({
-        behavior: "smooth"
+        behavior: "smooth",
+        block: "start"
       });
 
     }
 
 
-    // New Link
+    /* =========================
+       NEW LINK
+    ========================= */
+
     function newLink() {
 
-      document
-        .getElementById("videoLink")
-        .value = "";
+      const input =
+        document.getElementById("videoLink");
 
-      document
-        .getElementById("videoPlayer")
-        .pause();
+      const video =
+        document.getElementById("videoPlayer");
 
-      document
-        .getElementById("videoPlayer")
-        .src = "";
+      const player =
+        document.getElementById("player");
 
-      document
-        .getElementById("player")
-        .style.display = "none";
+
+      input.value = "";
+
+      video.pause();
+
+      video.removeAttribute("src");
+
+      video.load();
+
+      player.style.display = "none";
 
     }
 
 
-    // Download Video
+    /* =========================
+       DOWNLOAD
+    ========================= */
+
     function downloadVideo() {
 
       const link =
@@ -477,12 +795,16 @@
           .value
           .trim();
 
+
       if (!link) {
 
-        alert("No video link available.");
+        alert(
+          "No video link available."
+        );
 
         return;
       }
+
 
       window.open(
         link,
@@ -492,7 +814,10 @@
     }
 
 
-    // VIP Button
+    /* =========================
+       VIP BUTTON
+    ========================= */
+
     function buyVIP() {
 
       alert(
@@ -502,8 +827,11 @@
     }
 
 
-    // Monetag In-App Interstitial
-    setTimeout(() => {
+    /* =========================
+       MONETAG IN-APP INTERSTITIAL
+    ========================= */
+
+    setTimeout(function () {
 
       if (
         typeof show_11929321 === "function"
@@ -532,7 +860,7 @@
       } else {
 
         console.log(
-          "Monetag SDK is not loaded yet."
+          "Monetag SDK is not loaded."
         );
 
       }
@@ -540,6 +868,7 @@
     }, 10000);
 
   </script>
+
 
 </body>
 </html>
