@@ -298,18 +298,23 @@
 
     function playVideo() {
 
-      const link = document.getElementById("videoLink").value.trim();
+  const link = document.getElementById("videoLink").value.trim();
 
-      if (!link) {
-        alert("Please enter a video link.");
-        return;
-      }
+  if (!link) {
+    alert("Please enter a video link.");
+    return;
+  }
 
-      const player = document.getElementById("player");
-      const video = document.getElementById("videoPlayer");
+  const player = document.getElementById("player");
+  const video = document.getElementById("videoPlayer");
 
+  // Show Monetag rewarded ad first
+  if (typeof show_11929319 === "function") {
+
+    show_11929319().then(() => {
+
+      // After ad finishes, play the video
       video.src = link;
-
       player.style.display = "block";
 
       video.play().catch(() => {
@@ -319,7 +324,38 @@
       player.scrollIntoView({
         behavior: "smooth"
       });
-    }
+
+    }).catch(() => {
+
+      // If ad fails, still allow video playback
+      video.src = link;
+      player.style.display = "block";
+
+      video.play().catch(() => {
+        console.log("Tap play to start the video.");
+      });
+
+      player.scrollIntoView({
+        behavior: "smooth"
+      });
+
+    });
+
+  } else {
+
+    // Monetag not loaded
+    video.src = link;
+    player.style.display = "block";
+
+    video.play().catch(() => {
+      console.log("Tap play to start the video.");
+    });
+
+    player.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+}
 
     function newLink() {
 
