@@ -308,53 +308,16 @@
   const player = document.getElementById("player");
   const video = document.getElementById("videoPlayer");
 
-  // Show Monetag rewarded ad first
-  if (typeof show_11929319 === "function") {
+  video.src = link;
+  player.style.display = "block";
 
-    show_11929319().then(() => {
+  video.play().catch(() => {
+    console.log("Tap play to start the video.");
+  });
 
-      // After ad finishes, play the video
-      video.src = link;
-      player.style.display = "block";
-
-      video.play().catch(() => {
-        console.log("Tap play to start the video.");
-      });
-
-      player.scrollIntoView({
-        behavior: "smooth"
-      });
-
-    }).catch(() => {
-
-      // If ad fails, still allow video playback
-      video.src = link;
-      player.style.display = "block";
-
-      video.play().catch(() => {
-        console.log("Tap play to start the video.");
-      });
-
-      player.scrollIntoView({
-        behavior: "smooth"
-      });
-
-    });
-
-  } else {
-
-    // Monetag not loaded
-    video.src = link;
-    player.style.display = "block";
-
-    video.play().catch(() => {
-      console.log("Tap play to start the video.");
-    });
-
-    player.scrollIntoView({
-      behavior: "smooth"
-    });
-  }
+  player.scrollIntoView({
+    behavior: "smooth"
+  });
 }
 
     function newLink() {
