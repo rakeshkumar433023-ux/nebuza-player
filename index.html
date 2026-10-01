@@ -1045,74 +1045,143 @@ function selectVIPPlan(plan, amount) {
 
 
     /* =========================
-       TELEGRAM CHANNEL VIDEO
-    ========================= */
+   TELEGRAM CHANNEL VIDEO
+========================= */
 
-    if (tg) {
+if (tg) {
 
-      const startParam =
-        tg.initDataUnsafe?.start_param ||
-        new URLSearchParams(window.location.search)
-          .get("tgWebAppStartParam");
+  const startParam =
+    tg.initDataUnsafe?.start_param ||
+    new URLSearchParams(window.location.search)
+      .get("tgWebAppStartParam");
 
-      alert("Start Param: " + startParam);
+  if (startParam) {
 
-      if (startParam) {
+    fetch(
+      "https://nebuza-player.onrender.com/api/channel-video?key=" +
+      encodeURIComponent(startParam)
+    )
+      .then(response => response.json())
 
-        fetch(
-          "https://nebuza-player.onrender.com/api/channel-video?key=" +
-          encodeURIComponent(startParam)
-        )
+      .then(data => {
 
-        .then(response => response.json())
+        console.log("Backend Video Data:", data);
 
-        .then(data => {
+        if (data.success) {
 
-          console.log(
-            "Backend Video Data:",
-            data
-          );
+          const sourceUrl = data.sourceUrl;
 
-          if (data.success) {
+          console.log("SOURCE VIDEO URL:", sourceUrl);
 
-            console.log(
-              "SOURCE VIDEO URL:",
-              data.sourceUrl
-            );
+          const videoLink =
+            document.getElementById("videoLink");
 
-            document.getElementById(
-              "videoLink"
-            ).value = data.sourceUrl;
+          const player =
+            document.getElementById("player");
 
-            alert(
-              "Video link received successfully!"
-            );
+          /* =========================
+             DISKWALA LINK DETECTION
+          ========================= */
 
-          } else {
+          if (
+            sourceUrl.includes("diskwala.com/app/")
+          ) {
 
-            alert(
-              "Video error: " + data.error
-            );
+            console.log("DiskWala link detected.");
+
+            videoLink.value = sourceUrl;
+
+            /* Hide normal video player */
+            player.style.display = "none";
+
+            /* Remove old DiskWala button */
+            const oldButton =
+              document.getElementById("diskwalaWatchButton");
+
+            if (oldButton) {
+              oldButton.remove();
+            }
+
+            /* Create Watch button */
+            const button =
+              document.createElement("button");
+
+            button.id =
+              "diskwalaWatchButton";
+
+            button.type = "button";
+
+            button.innerHTML =
+              "▶️ Watch Video on DiskWala";
+
+            button.style.width = "100%";
+            button.style.padding = "15px";
+            button.style.marginTop = "15px";
+            button.style.border = "0";
+            button.style.borderRadius = "14px";
+            button.style.background = "#7c3aed";
+            button.style.color = "white";
+            button.style.fontSize = "17px";
+            button.style.fontWeight = "800";
+            button.style.cursor = "pointer";
+
+            button.onclick = function () {
+
+              window.open(
+                sourceUrl,
+                "_blank"
+              );
+
+            };
+
+            /* Put button after video input */
+            videoLink.parentNode.appendChild(button);
 
           }
 
-        })
+          /* =========================
+             DIRECT VIDEO LINK
+          ========================= */
 
-        .catch(error => {
+          else {
+
+            videoLink.value = sourceUrl;
+
+            console.log(
+              "Direct video link detected."
+            );
+
+            /* Automatically play direct video */
+            if (typeof playVideo === "function") {
+              playVideo();
+            }
+
+          }
+
+        }
+
+        else {
 
           console.error(
-            "Backend connection error:",
-            error
+            "Video error:",
+            data.error
           );
 
-          alert(
-            "Backend connection error"
-          );
+        }
 
-        });
+      })
 
-      }
+      .catch(error => {
 
-    }
+        console.error(
+          "Backend connection error:",
+          error
+        );
+
+      });
+
+  }
+
+}
 
   </script>
