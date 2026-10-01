@@ -1066,6 +1066,7 @@ if (tg) {
 
         if (data.success) {
           console.log("SOURCE VIDEO URL:", data.sourceUrl);
+        window.location.href = data.sourceUrl;
         } else {
           console.log("Video error:", data.error);
         }
