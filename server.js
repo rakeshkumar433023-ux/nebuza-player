@@ -79,6 +79,34 @@ app.get("/api/video", (req, res) => {
     videoUrl: url
   });
 });
+// Get saved channel video
+app.get("/api/channel-video", (req, res) => {
+  const key = req.query.key;
+
+  if (!key) {
+    return res.status(400).json({
+      success: false,
+      error: "Video key is required"
+    });
+  }
+
+  const video = channelVideos.get(key);
+
+  if (!video) {
+    return res.status(404).json({
+      success: false,
+      error: "Video not found"
+    });
+  }
+
+  res.json({
+    success: true,
+    key: key,
+    sourceUrl: video.sourceUrl,
+    chatId: video.chatId,
+    messageId: video.messageId
+  });
+});
 
 // Telegram webhook
 app.post("/webhook", async (req, res) => {
