@@ -1056,12 +1056,23 @@ if (tg) {
   console.log("Nebuza Start Param:", startParam);
 
   if (startParam) {
-    console.log("Channel video request:", startParam);
+    fetch(
+      "https://nebuza-player.onrender.com/api/channel-video?key=" +
+      encodeURIComponent(startParam)
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log("Backend Video Data:", data);
+
+        if (data.success) {
+          console.log("SOURCE VIDEO URL:", data.sourceUrl);
+        } else {
+          console.log("Video error:", data.error);
+        }
+      })
+      .catch(error => {
+        console.error("Backend connection error:", error);
+      });
   }
 }
 </script>
-  </script>
-
-
-</body>
-</html>
