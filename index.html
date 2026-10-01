@@ -1007,7 +1007,7 @@ function selectVIPPlan(plan, amount) {
        MONETAG IN-APP INTERSTITIAL
     ========================= */
 
-    setTimeout(function () {
+        setTimeout(function () {
 
       if (
         typeof show_11929321 === "function"
@@ -1042,40 +1042,77 @@ function selectVIPPlan(plan, amount) {
       }
 
     }, 10000);
-    <script>
-      
-<script>
-const tg = window.Telegram?.WebApp;
 
-if (tg) {
-  tg.ready();
 
-  const startParam =
-    tg.initDataUnsafe?.start_param ||
-    new URLSearchParams(window.location.search).get("tgWebAppStartParam");
+    /* =========================
+       TELEGRAM CHANNEL VIDEO
+    ========================= */
 
-  alert("Start Param: " + startParam);
+    if (tg) {
 
-  if (startParam) {
-    fetch(
-      "https://nebuza-player.onrender.com/api/channel-video?key=" +
-      encodeURIComponent(startParam)
-    )
-      .then(response => response.json())
-      .then(data => {
-        console.log("Backend Video Data:", data);
+      const startParam =
+        tg.initDataUnsafe?.start_param ||
+        new URLSearchParams(window.location.search)
+          .get("tgWebAppStartParam");
 
-        if (data.success) {
-          console.log("SOURCE VIDEO URL:", data.sourceUrl);
-        document.getElementById("videoLink").value = data.sourceUrl;
-alert("Video link received successfully!");
-        } else {
-          console.log("Video error:", data.error);
-        }
-      })
-      .catch(error => {
-        console.error("Backend connection error:", error);
-      });
-  }
-}
-</script>
+      alert("Start Param: " + startParam);
+
+      if (startParam) {
+
+        fetch(
+          "https://nebuza-player.onrender.com/api/channel-video?key=" +
+          encodeURIComponent(startParam)
+        )
+
+        .then(response => response.json())
+
+        .then(data => {
+
+          console.log(
+            "Backend Video Data:",
+            data
+          );
+
+          if (data.success) {
+
+            console.log(
+              "SOURCE VIDEO URL:",
+              data.sourceUrl
+            );
+
+            document.getElementById(
+              "videoLink"
+            ).value = data.sourceUrl;
+
+            alert(
+              "Video link received successfully!"
+            );
+
+          } else {
+
+            alert(
+              "Video error: " + data.error
+            );
+
+          }
+
+        })
+
+        .catch(error => {
+
+          console.error(
+            "Backend connection error:",
+            error
+          );
+
+          alert(
+            "Backend connection error"
+          );
+
+        });
+
+      }
+
+    }
+
+  </script>
