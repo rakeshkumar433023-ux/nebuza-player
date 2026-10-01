@@ -112,11 +112,10 @@ app.get("/api/channel-video", (req, res) => {
 app.post("/webhook", async (req, res) => {
   try {
     const update = req.body;
-
+const post = update.channel_post;
     console.log("Telegram update received:", JSON.stringify(update));
 
-    if (update.channel_post) {
-  const post = update.channel_post;
+    if (post) {
 
   const caption = post.caption || "";
 
