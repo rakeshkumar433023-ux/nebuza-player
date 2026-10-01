@@ -1053,7 +1053,7 @@ if (tg) {
     tg.initDataUnsafe?.start_param ||
     new URLSearchParams(window.location.search).get("tgWebAppStartParam");
 
-  console.log("Nebuza Start Param:", startParam);
+  alert("Start Param: " + startParam);
 
   if (startParam) {
     fetch(
