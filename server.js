@@ -138,7 +138,7 @@ if (urlMatch) {
 
   console.log("VIDEO SAVED:", videoKey);
 }
-else {
+} else {
   console.log("No source URL found in caption.");
 }
   const chatId = post.chat.id;
